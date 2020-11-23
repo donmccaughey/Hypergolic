@@ -30,6 +30,8 @@
 		D4E766E8256B8EDE000FC3A3 /* HydrazineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E76668256B8DBE000FC3A3 /* HydrazineTests.swift */; };
 		D4E766FC256B8F36000FC3A3 /* GeminiTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E766FB256B8F36000FC3A3 /* GeminiTransaction.swift */; };
 		D4E766FD256B8F36000FC3A3 /* GeminiTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E766FB256B8F36000FC3A3 /* GeminiTransaction.swift */; };
+		D4E7670B256B9132000FC3A3 /* GeminiURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E7670A256B9132000FC3A3 /* GeminiURL.swift */; };
+		D4E7670C256B9132000FC3A3 /* GeminiURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E7670A256B9132000FC3A3 /* GeminiURL.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -171,6 +173,7 @@
 		D4E766A5256B8E32000FC3A3 /* Hydrazine.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Hydrazine.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4E766AD256B8E32000FC3A3 /* HydrazineTests (iOS).xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "HydrazineTests (iOS).xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4E766FB256B8F36000FC3A3 /* GeminiTransaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeminiTransaction.swift; sourceTree = "<group>"; };
+		D4E7670A256B9132000FC3A3 /* GeminiURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeminiURL.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -338,6 +341,7 @@
 				D4E7665B256B8DBE000FC3A3 /* Hydrazine.h */,
 				D4E7665C256B8DBE000FC3A3 /* Info.plist */,
 				D4E766FB256B8F36000FC3A3 /* GeminiTransaction.swift */,
+				D4E7670A256B9132000FC3A3 /* GeminiURL.swift */,
 			);
 			path = Hydrazine;
 			sourceTree = "<group>";
@@ -726,6 +730,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D4E766FC256B8F36000FC3A3 /* GeminiTransaction.swift in Sources */,
+				D4E7670B256B9132000FC3A3 /* GeminiURL.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -742,6 +747,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D4E766FD256B8F36000FC3A3 /* GeminiTransaction.swift in Sources */,
+				D4E7670C256B9132000FC3A3 /* GeminiURL.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

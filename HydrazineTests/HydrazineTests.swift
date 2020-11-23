@@ -1,12 +1,6 @@
-//
-//  HydrazineTests.swift
-//  HydrazineTests
-//
-//  Created by Don McCaughey on 11/22/20.
-//
-
 import XCTest
 @testable import Hydrazine
+
 
 class HydrazineTests: XCTestCase {
 
