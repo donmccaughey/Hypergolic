@@ -1,6 +1,9 @@
 import Foundation
 import Network
+import Hydrazine
 
+
+let transaction = GeminiTransaction()
 
 let url: URL
 if CommandLine.arguments.count > 1 {
