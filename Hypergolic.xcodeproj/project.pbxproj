@@ -49,6 +49,8 @@
 		D4E76521256B7951000FC3A3 /* Tests macOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Tests macOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4E76525256B7951000FC3A3 /* Tests_macOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests_macOS.swift; sourceTree = "<group>"; };
 		D4E76527256B7951000FC3A3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D4E76544256B7B76000FC3A3 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		D4E76545256B7C25000FC3A3 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +88,8 @@
 		D4E764F9256B794B000FC3A3 = {
 			isa = PBXGroup;
 			children = (
+				D4E76545256B7C25000FC3A3 /* LICENSE */,
+				D4E76544256B7B76000FC3A3 /* README.md */,
 				D4E764FE256B794B000FC3A3 /* Shared */,
 				D4E76508256B7951000FC3A3 /* iOS */,
 				D4E7650F256B7951000FC3A3 /* macOS */,
