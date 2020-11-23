@@ -6,8 +6,11 @@ import Hydrazine
 let urlString = CommandLine.arguments.count > 1
     ? CommandLine.arguments[1]
     : "gemini://gemini.circumlunar.space/"
-let (url, error) = parseGeminiURL(urlString: urlString)
-if let error = error {
+let url: URL
+switch GeminiURL.parse(urlString: urlString) {
+case .url(let value):
+    url = value
+case .error(let error):
     print(error.errorMessage)
     exit(EXIT_FAILURE)
 }
@@ -49,8 +52,8 @@ sec_protocol_options_set_verify_block(tlsOptions.securityProtocolOptions, { (sec
 let tlsParameters = NWParameters.init(tls: tlsOptions)
 
 
-let host = NWEndpoint.Host(url!.host!)
-let port = NWEndpoint.Port(integerLiteral: UInt16(url!.port ?? 1965))
+let host = NWEndpoint.Host(url.host!)
+let port = NWEndpoint.Port(integerLiteral: UInt16(url.port ?? 1965))
 
 let connection = NWConnection(host:host, port:port, using: tlsParameters)
 connection.stateUpdateHandler = { (newState) in
@@ -79,7 +82,7 @@ NSLog("Starting")
 connection.start(queue: DispatchQueue.main)
 
 NSLog("Sending")
-let requestString = "\(url!)\r\n"
+let requestString = "\(url)\r\n"
 NSLog(">>> \(requestString)")
 let request = requestString.data(using: .utf8)
 connection.send(content: request, completion: .idempotent)
