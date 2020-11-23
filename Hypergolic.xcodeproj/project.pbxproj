@@ -15,6 +15,7 @@
 		D4E7652B256B7951000FC3A3 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E76500256B794B000FC3A3 /* ContentView.swift */; };
 		D4E7652C256B7951000FC3A3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D4E76501256B7951000FC3A3 /* Assets.xcassets */; };
 		D4E7652D256B7951000FC3A3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D4E76501256B7951000FC3A3 /* Assets.xcassets */; };
+		D4E7654D256B7CB3000FC3A3 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E7654C256B7CB3000FC3A3 /* main.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,6 +35,18 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		D4E76548256B7CB3000FC3A3 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		D4E764FF256B794B000FC3A3 /* HypergolicApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HypergolicApp.swift; sourceTree = "<group>"; };
 		D4E76500256B794B000FC3A3 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -51,6 +64,8 @@
 		D4E76527256B7951000FC3A3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D4E76544256B7B76000FC3A3 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		D4E76545256B7C25000FC3A3 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		D4E7654A256B7CB3000FC3A3 /* hypergolic */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = hypergolic; sourceTree = BUILT_PRODUCTS_DIR; };
+		D4E7654C256B7CB3000FC3A3 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +97,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		D4E76547256B7CB3000FC3A3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -93,6 +115,7 @@
 				D4E764FE256B794B000FC3A3 /* Shared */,
 				D4E76508256B7951000FC3A3 /* iOS */,
 				D4E7650F256B7951000FC3A3 /* macOS */,
+				D4E7654B256B7CB3000FC3A3 /* hypergolic */,
 				D4E76519256B7951000FC3A3 /* Tests iOS */,
 				D4E76524256B7951000FC3A3 /* Tests macOS */,
 				D4E76507256B7951000FC3A3 /* Products */,
@@ -116,6 +139,7 @@
 				D4E7650E256B7951000FC3A3 /* Hypergolic.app */,
 				D4E76516256B7951000FC3A3 /* Tests iOS.xctest */,
 				D4E76521256B7951000FC3A3 /* Tests macOS.xctest */,
+				D4E7654A256B7CB3000FC3A3 /* hypergolic */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -153,6 +177,14 @@
 				D4E76527256B7951000FC3A3 /* Info.plist */,
 			);
 			path = "Tests macOS";
+			sourceTree = "<group>";
+		};
+		D4E7654B256B7CB3000FC3A3 /* hypergolic */ = {
+			isa = PBXGroup;
+			children = (
+				D4E7654C256B7CB3000FC3A3 /* main.swift */,
+			);
+			path = hypergolic;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -228,6 +260,23 @@
 			productReference = D4E76521256B7951000FC3A3 /* Tests macOS.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
+		D4E76549256B7CB3000FC3A3 /* hypergolic */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D4E7654E256B7CB3000FC3A3 /* Build configuration list for PBXNativeTarget "hypergolic" */;
+			buildPhases = (
+				D4E76546256B7CB3000FC3A3 /* Sources */,
+				D4E76547256B7CB3000FC3A3 /* Frameworks */,
+				D4E76548256B7CB3000FC3A3 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = hypergolic;
+			productName = hypergolic;
+			productReference = D4E7654A256B7CB3000FC3A3 /* hypergolic */;
+			productType = "com.apple.product-type.tool";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -251,6 +300,9 @@
 						CreatedOnToolsVersion = 12.2;
 						TestTargetID = D4E7650D256B7951000FC3A3;
 					};
+					D4E76549256B7CB3000FC3A3 = {
+						CreatedOnToolsVersion = 12.2;
+					};
 				};
 			};
 			buildConfigurationList = D4E764FD256B794B000FC3A3 /* Build configuration list for PBXProject "Hypergolic" */;
@@ -268,6 +320,7 @@
 			targets = (
 				D4E76505256B7951000FC3A3 /* Hypergolic (iOS) */,
 				D4E7650D256B7951000FC3A3 /* Hypergolic (macOS) */,
+				D4E76549256B7CB3000FC3A3 /* hypergolic */,
 				D4E76515256B7951000FC3A3 /* Tests iOS */,
 				D4E76520256B7951000FC3A3 /* Tests macOS */,
 			);
@@ -339,6 +392,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				D4E76526256B7951000FC3A3 /* Tests_macOS.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D4E76546256B7CB3000FC3A3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D4E7654D256B7CB3000FC3A3 /* main.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -651,6 +712,32 @@
 			};
 			name = Release;
 		};
+		D4E7654F256B7CB3000FC3A3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = K39VF43BJL;
+				ENABLE_HARDENED_RUNTIME = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		D4E76550256B7CB3000FC3A3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = K39VF43BJL;
+				ENABLE_HARDENED_RUNTIME = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -695,6 +782,15 @@
 			buildConfigurations = (
 				D4E7653A256B7951000FC3A3 /* Debug */,
 				D4E7653B256B7951000FC3A3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D4E7654E256B7CB3000FC3A3 /* Build configuration list for PBXNativeTarget "hypergolic" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D4E7654F256B7CB3000FC3A3 /* Debug */,
+				D4E76550256B7CB3000FC3A3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
