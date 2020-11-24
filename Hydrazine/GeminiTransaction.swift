@@ -24,14 +24,14 @@ public class GeminiTransaction {
     
     public init(url: URL,
                 delegate: GeminiTransactionDelegate? = nil,
-                queue: DispatchQueue = DispatchQueue.global())
+                queue: DispatchQueue = DispatchQueue(label: "cc.donm.Hydrazine"))
     {
         self.delegate = delegate
         self.queue = queue
         self.url = url
     }
     
-    public func start() {
+    public func run() {
         NSLog("Starting")
         connection.start(queue: queue)
 
@@ -40,6 +40,7 @@ public class GeminiTransaction {
         NSLog(">>> \(requestString)")
         let request = requestString.data(using: .utf8)
         connection.send(content: request, completion: .idempotent)
+        receive()
     }
     
     private func createConnection() -> NWConnection {
@@ -96,5 +97,34 @@ public class GeminiTransaction {
             sec_protocol_verify_complete(isVerified)
         }, queue)
         return tlsOptions
+    }
+
+    private func receive() {
+        NSLog("Receiving")
+        connection.receive(minimumIncompleteLength: 1, maximumLength: 4096) {
+            (data, contentContext, isComplete, error) in
+            
+            if let data = data, !data.isEmpty {
+                if let response = String(data: data, encoding: .utf8) {
+                    print("<<< \(response)")
+                } else {
+                    NSLog("Encoding error in response")
+                    exit(EXIT_FAILURE)
+                }
+            }
+            if let contentContext = contentContext, contentContext.isFinal {
+                NSLog("Received final content")
+                exit(EXIT_SUCCESS);
+            }
+            if isComplete {
+                NSLog("Receive complete")
+                exit(EXIT_SUCCESS);
+            }
+            if let error = error {
+                NSLog("Receive error: \(error)")
+                exit(EXIT_FAILURE)
+            }
+            self.receive()
+        }
     }
 }
