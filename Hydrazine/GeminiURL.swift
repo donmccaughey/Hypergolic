@@ -1,27 +1,29 @@
 import Foundation
 
 
-public enum GeminiURLError: Error {
-    case urlTooLong(String, Int)
-    case invalidURL(String)
-    case missingHost(String)
-    
-    public var errorMessage: String {
-        switch self {
-        case .urlTooLong(let urlString, let byteCount):
-            return "URL '\(urlString)' is too long by \(byteCount-1024) bytes"
-        case .invalidURL(let urlString):
-            return "URL '\(urlString)' is invalid"
-        case .missingHost(let urlString):
-            return "URL '\(urlString)' is missing the host name"
-        }
-    }
-}
+typealias StandardError = Error
 
 
 public enum GeminiURL {
+    public enum Error: StandardError {
+        case urlTooLong(String, Int)
+        case invalidURL(String)
+        case missingHost(String)
+        
+        public var errorMessage: String {
+            switch self {
+            case .urlTooLong(let urlString, let byteCount):
+                return "URL '\(urlString)' is too long by \(byteCount-1024) bytes"
+            case .invalidURL(let urlString):
+                return "URL '\(urlString)' is invalid"
+            case .missingHost(let urlString):
+                return "URL '\(urlString)' is missing the host name"
+            }
+        }
+    }
+    
     case url(URL)
-    case error(GeminiURLError)
+    case error(Error)
     
     public static func parse(urlString: String) -> GeminiURL {
         if urlString.utf8.count > 1024 {

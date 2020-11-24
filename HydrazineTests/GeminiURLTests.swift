@@ -21,7 +21,7 @@ class GeminiURLTests: XCTestCase {
         XCTAssertTrue(urlString.utf8.count > 1024)
         
         let geminiURL = GeminiURL.parse(urlString: urlString)
-        if case let GeminiURL.error(GeminiURLError.urlTooLong(sameURLString, count)) = geminiURL {
+        if case let GeminiURL.error(GeminiURL.Error.urlTooLong(sameURLString, count)) = geminiURL {
             XCTAssertEqual(urlString, sameURLString)
             XCTAssertEqual(urlString.utf8.count, count)
         } else {
@@ -32,7 +32,7 @@ class GeminiURLTests: XCTestCase {
     func testInvalidURL() throws {
         let urlString = ""
         let geminiURL = GeminiURL.parse(urlString: urlString)
-        if case let GeminiURL.error(GeminiURLError.invalidURL(sameURLString)) = geminiURL {
+        if case let GeminiURL.error(GeminiURL.Error.invalidURL(sameURLString)) = geminiURL {
             XCTAssertEqual(urlString, sameURLString)
         } else {
             XCTFail()
@@ -42,7 +42,7 @@ class GeminiURLTests: XCTestCase {
     func testMissingHost() throws {
         let urlString = "gemini:///foo/bar/"
         let geminiURL = GeminiURL.parse(urlString: urlString)
-        if case let GeminiURL.error(GeminiURLError.missingHost(sameURLString)) = geminiURL {
+        if case let GeminiURL.error(GeminiURL.Error.missingHost(sameURLString)) = geminiURL {
             XCTAssertEqual(urlString, sameURLString)
         } else {
             XCTFail()
