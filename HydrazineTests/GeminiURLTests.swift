@@ -5,9 +5,9 @@ import XCTest
 class GeminiURLTests: XCTestCase {
     func testValidURL() {
         let urlString = "gemini://foo.example.com/"
-        let geminiURL = GeminiURL.parse(urlString: urlString)
-        if case let GeminiURL.url(url) = geminiURL {
-            XCTAssertEqual(urlString, url.absoluteString)
+        let result = GeminiURL.parse(string: urlString)
+        if case let .success(geminiURL) = result {
+            XCTAssertEqual(urlString, geminiURL.url.absoluteString)
         } else {
             XCTFail()
         }
@@ -18,10 +18,10 @@ class GeminiURLTests: XCTestCase {
         for _ in 0..<256 {
             urlString.append("bar/")
         }
-        XCTAssertTrue(urlString.utf8.count > 1024)
+        assert(urlString.utf8.count > 1024)
         
-        let geminiURL = GeminiURL.parse(urlString: urlString)
-        if case let GeminiURL.error(GeminiURL.Error.urlTooLong(sameURLString, count)) = geminiURL {
+        let geminiURL = GeminiURL.parse(string: urlString)
+        if case let .failure(.urlTooLong(sameURLString, count)) = geminiURL {
             XCTAssertEqual(urlString, sameURLString)
             XCTAssertEqual(urlString.utf8.count, count)
         } else {
@@ -31,8 +31,8 @@ class GeminiURLTests: XCTestCase {
     
     func testInvalidURL() throws {
         let urlString = ""
-        let geminiURL = GeminiURL.parse(urlString: urlString)
-        if case let GeminiURL.error(GeminiURL.Error.invalidURL(sameURLString)) = geminiURL {
+        let geminiURL = GeminiURL.parse(string: urlString)
+        if case let .failure(.invalidURL(sameURLString)) = geminiURL {
             XCTAssertEqual(urlString, sameURLString)
         } else {
             XCTFail()
@@ -41,8 +41,8 @@ class GeminiURLTests: XCTestCase {
     
     func testMissingHost() throws {
         let urlString = "gemini:///foo/bar/"
-        let geminiURL = GeminiURL.parse(urlString: urlString)
-        if case let GeminiURL.error(GeminiURL.Error.missingHost(sameURLString)) = geminiURL {
+        let geminiURL = GeminiURL.parse(string: urlString)
+        if case let .failure(.missingHost(sameURLString)) = geminiURL {
             XCTAssertEqual(urlString, sameURLString)
         } else {
             XCTFail()

@@ -1,11 +1,8 @@
 import Foundation
 
 
-typealias StandardError = Error
-
-
-public enum GeminiURL {
-    public enum Error: StandardError {
+public struct GeminiURL {
+    public enum ParseError: Error {
         case urlTooLong(String, Int)
         case invalidURL(String)
         case missingHost(String)
@@ -22,20 +19,25 @@ public enum GeminiURL {
         }
     }
     
-    case url(URL)
-    case error(Error)
+    public let url: URL
     
-    public static func parse(urlString: String) -> GeminiURL {
-        if urlString.utf8.count > 1024 {
-            return .error(.urlTooLong(urlString, urlString.utf8.count))
+    private init(url: URL) {
+        self.url = url
+    }
+    
+    public static func parse(string: String) -> Result<GeminiURL, ParseError> {
+        if let url = URL(string: string) {
+            if let host = url.host, !host.isEmpty {
+                if url.absoluteString.utf8.count > 1024 {
+                    return .failure(.urlTooLong(string, string.utf8.count))
+                } else {
+                    return .success(GeminiURL(url: url))
+                }
+            } else {
+                return .failure(.missingHost(string))
+            }
+        } else {
+            return .failure(.invalidURL(string))
         }
-        let parsedURL = URL(string: urlString)
-        if parsedURL == nil {
-            return .error(.invalidURL(urlString))
-        }
-        if parsedURL!.host == nil || parsedURL!.host!.isEmpty {
-            return .error(.missingHost(urlString))
-        }
-        return .url(parsedURL!)
     }
 }

@@ -6,10 +6,10 @@ import Hydrazine
 let urlString = CommandLine.arguments.count > 1
     ? CommandLine.arguments[1]
     : "gemini://gemini.circumlunar.space/"
-switch GeminiURL.parse(urlString: urlString) {
-case .url(let url):
-    GeminiTransaction(url: url, delegate: Delegate()).run()
-case .error(let error):
+switch GeminiURL.parse(string: urlString) {
+case .success(let geminiURL):
+    GeminiTransaction(url: geminiURL.url, delegate: Delegate()).run()
+case .failure(let error):
     print(error.errorMessage)
     exit(EXIT_FAILURE)
 }
