@@ -26,9 +26,8 @@ public class GeminiTransaction {
         connection.start(queue: queue)
 
         let requestString = "\(url)\r\n"
-        NSLog(">>> \(requestString)")
-        let request = requestString.data(using: .utf8)
-        delegate?.willSendRequest(self)
+        let request = requestString.data(using: .utf8)!
+        delegate?.willSendRequest(self, request: request)
         connection.send(content: request, completion: .idempotent)
         receive()
     }
@@ -90,29 +89,21 @@ public class GeminiTransaction {
     }
 
     private func receive() {
-        NSLog("Receiving")
+        delegate?.willScheduleReceive(self)
         connection.receive(minimumIncompleteLength: 1, maximumLength: 4096) {
-            (data, contentContext, isComplete, error) in
+            [self] (data, contentContext, isComplete, error) in
             
             if let data = data, !data.isEmpty {
-                if let response = String(data: data, encoding: .utf8) {
-                    print("<<< \(response)")
-                } else {
-                    NSLog("Encoding error in response")
-                    exit(EXIT_FAILURE)
-                }
+                delegate?.didReceiveData(self, data: data)
             }
             if let contentContext = contentContext, contentContext.isFinal {
-                NSLog("Received final content")
-                exit(EXIT_SUCCESS);
+                delegate?.didReceiveFinalMessage(self)
             }
             if isComplete {
-                NSLog("Receive complete")
-                exit(EXIT_SUCCESS);
+                delegate?.receiveDidComplete(self)
             }
             if let error = error {
-                NSLog("Receive error: \(error)")
-                exit(EXIT_FAILURE)
+                delegate?.receiveDidFail(self, error: error)
             }
             self.receive()
         }
