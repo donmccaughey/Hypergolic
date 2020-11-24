@@ -4,30 +4,38 @@ import Network
 
 
 class Delegate: GeminiTransactionDelegate {
+    func hasStarted(_ transaction: GeminiTransaction) {
+        NSLog("Has started")
+    }
+    
+    func willSendRequest(_ transaction: GeminiTransaction) {
+        NSLog("Will send request")
+    }
+    
     func connectionIsSetup(_ transaction: GeminiTransaction) {
-        NSLog("Setup")
+        NSLog("Connection is setup")
     }
     
     func connectionIsWaiting(_ transaction: GeminiTransaction, error: NWError) {
-        NSLog("Waiting: \(error)")
+        NSLog("Connection is waiting: \(error)")
         exit(EXIT_FAILURE)
     }
     
     func connectionIsPreparing(_ transaction: GeminiTransaction) {
-        NSLog("Preparing")
+        NSLog("Connection is preparing")
     }
     
     func connectionIsReady(_ transaction: GeminiTransaction) {
-        NSLog("Ready")
+        NSLog("Connection is ready")
     }
     
     func connectionFailed(_ transaction: GeminiTransaction, error: NWError) {
-        NSLog("Failed: \(error)")
+        NSLog("Connection failed: \(error)")
         exit(EXIT_FAILURE)
     }
     
     func connectionCancelled(_ transaction: GeminiTransaction) {
-        NSLog("Cancelled")
+        NSLog("Connection cancelled")
         exit(EXIT_FAILURE)
     }
 }

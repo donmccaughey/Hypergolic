@@ -22,13 +22,13 @@ public class GeminiTransaction {
     }
     
     public func run() {
-        NSLog("Starting")
+        delegate?.hasStarted(self)
         connection.start(queue: queue)
 
-        NSLog("Sending")
         let requestString = "\(url)\r\n"
         NSLog(">>> \(requestString)")
         let request = requestString.data(using: .utf8)
+        delegate?.willSendRequest(self)
         connection.send(content: request, completion: .idempotent)
         receive()
     }
