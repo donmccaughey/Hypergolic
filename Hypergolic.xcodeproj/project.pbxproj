@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D46759B8256C93CD00CC38D9 /* Delegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D46759B7256C93CD00CC38D9 /* Delegate.swift */; };
 		D4E7651B256B7951000FC3A3 /* Tests_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E7651A256B7951000FC3A3 /* Tests_iOS.swift */; };
 		D4E76526256B7951000FC3A3 /* Tests_macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E76525256B7951000FC3A3 /* Tests_macOS.swift */; };
 		D4E76528256B7951000FC3A3 /* HypergolicApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E764FF256B794B000FC3A3 /* HypergolicApp.swift */; };
@@ -146,6 +147,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		D46759B7256C93CD00CC38D9 /* Delegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Delegate.swift; sourceTree = "<group>"; };
 		D4E764FF256B794B000FC3A3 /* HypergolicApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HypergolicApp.swift; sourceTree = "<group>"; };
 		D4E76500256B794B000FC3A3 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		D4E76501256B7951000FC3A3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -330,6 +332,7 @@
 		D4E7654B256B7CB3000FC3A3 /* hypergolic */ = {
 			isa = PBXGroup;
 			children = (
+				D46759B7256C93CD00CC38D9 /* Delegate.swift */,
 				D4E7654C256B7CB3000FC3A3 /* main.swift */,
 			);
 			path = hypergolic;
@@ -721,6 +724,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D46759B8256C93CD00CC38D9 /* Delegate.swift in Sources */,
 				D4E7654D256B7CB3000FC3A3 /* main.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

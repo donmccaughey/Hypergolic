@@ -15,46 +15,20 @@ case .error(let error):
     exit(EXIT_FAILURE)
 }
 
-
-let transaction = GeminiTransaction(url: url)
-
-let connection = NWConnection(host: transaction.host,
-                              port: transaction.port,
-                              using: transaction.tlsParameters)
-connection.stateUpdateHandler = { (newState) in
-    switch (newState) {
-    case .setup:
-        NSLog("Setup")
-    case .waiting(let error):
-        NSLog("Waiting: \(error)")
-        exit(EXIT_FAILURE)
-    case .preparing:
-        NSLog("Preparing")
-    case .ready:
-        break
-    case .failed(let error):
-        NSLog("Failed: \(error)")
-        exit(EXIT_FAILURE)
-    case .cancelled:
-        NSLog("Cancelled")
-        exit(EXIT_FAILURE)
-    @unknown default:
-        fatalError()
-    }
-}
+let transaction = GeminiTransaction(url: url, delegate: Delegate())
 
 NSLog("Starting")
-connection.start(queue: transaction.queue)
+transaction.connection.start(queue: transaction.queue)
 
 NSLog("Sending")
 let requestString = "\(transaction.url)\r\n"
 NSLog(">>> \(requestString)")
 let request = requestString.data(using: .utf8)
-connection.send(content: request, completion: .idempotent)
+transaction.connection.send(content: request, completion: .idempotent)
 
 func receive() {
     NSLog("Receiving")
-    connection.receive(minimumIncompleteLength: 1, maximumLength: 4096) { (data, contentContext, isComplete, error) in
+    transaction.connection.receive(minimumIncompleteLength: 1, maximumLength: 4096) { (data, contentContext, isComplete, error) in
         if let data = data, !data.isEmpty {
             if let response = String(data: data, encoding: .utf8) {
                 print("<<< \(response)")

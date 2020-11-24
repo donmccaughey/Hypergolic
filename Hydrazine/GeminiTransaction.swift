@@ -2,20 +2,59 @@ import Foundation
 import Network
 
 
+public protocol GeminiTransactionDelegate {
+    func connectionIsSetup(_ transaction: GeminiTransaction)
+    func connectionIsWaiting(_ transaction: GeminiTransaction, error: NWError)
+    func connectionIsPreparing(_ transaction: GeminiTransaction)
+    func connectionIsReady(_ transaction: GeminiTransaction)
+    func connectionFailed(_ transaction: GeminiTransaction, error: NWError)
+    func connectionCancelled(_ transaction: GeminiTransaction)
+}
+
+
 public class GeminiTransaction {
+    public var delegate: GeminiTransactionDelegate?
     public let queue: DispatchQueue
     public let url: URL
     
+    public lazy var connection = createConnection()
     public lazy var host = NWEndpoint.Host(url.host!)
     public lazy var port = NWEndpoint.Port(integerLiteral: UInt16(url.port ?? 1965))
-    public lazy var tlsParameters = NWParameters.init(tls: getCustomTLSOptions())
+    public lazy var tlsParameters = NWParameters.init(tls: createTLSOptions())
     
-    public init(url: URL) {
-        self.queue = DispatchQueue.global()
+    public init(url: URL,
+                delegate: GeminiTransactionDelegate? = nil,
+                queue: DispatchQueue = DispatchQueue.global())
+    {
+        self.delegate = delegate
+        self.queue = queue
         self.url = url
     }
     
-    private func getCustomTLSOptions() -> NWProtocolTLS.Options {
+    private func createConnection() -> NWConnection {
+        let connection = NWConnection(host: host, port: port, using: tlsParameters)
+        connection.stateUpdateHandler = { (newState) in
+            switch (newState) {
+            case .setup:
+                self.delegate?.connectionIsSetup(self)
+            case .waiting(let error):
+                self.delegate?.connectionIsWaiting(self, error: error)
+            case .preparing:
+                self.delegate?.connectionIsPreparing(self)
+            case .ready:
+                self.delegate?.connectionIsReady(self)
+            case .failed(let error):
+                self.delegate?.connectionFailed(self, error: error)
+            case .cancelled:
+                self.delegate?.connectionCancelled(self)
+            @unknown default:
+                fatalError()
+            }
+        }
+        return connection
+    }
+    
+    private func createTLSOptions() -> NWProtocolTLS.Options {
         let tlsOptions = NWProtocolTLS.Options()
         sec_protocol_options_set_verify_block(tlsOptions.securityProtocolOptions, { (sec_protocol_metadata, sec_trust, sec_protocol_verify_complete) in
             NSLog("in sec_protocol_verify_t block")
