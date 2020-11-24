@@ -17,7 +17,6 @@
 		D4E7652D256B7951000FC3A3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D4E76501256B7951000FC3A3 /* Assets.xcassets */; };
 		D4E7654D256B7CB3000FC3A3 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E7654C256B7CB3000FC3A3 /* main.swift */; };
 		D4E76662256B8DBE000FC3A3 /* Hydrazine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4E76659256B8DBE000FC3A3 /* Hydrazine.framework */; };
-		D4E76669256B8DBE000FC3A3 /* HydrazineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E76668256B8DBE000FC3A3 /* HydrazineTests.swift */; };
 		D4E7666B256B8DBE000FC3A3 /* Hydrazine.h in Headers */ = {isa = PBXBuildFile; fileRef = D4E7665B256B8DBE000FC3A3 /* Hydrazine.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D4E7666E256B8DBE000FC3A3 /* Hydrazine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4E76659256B8DBE000FC3A3 /* Hydrazine.framework */; };
 		D4E7666F256B8DBE000FC3A3 /* Hydrazine.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D4E76659256B8DBE000FC3A3 /* Hydrazine.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -27,7 +26,6 @@
 		D4E766BA256B8E32000FC3A3 /* Hydrazine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4E766A5256B8E32000FC3A3 /* Hydrazine.framework */; };
 		D4E766BB256B8E32000FC3A3 /* Hydrazine.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D4E766A5256B8E32000FC3A3 /* Hydrazine.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D4E766E7256B8ED8000FC3A3 /* Hydrazine.h in Headers */ = {isa = PBXBuildFile; fileRef = D4E7665B256B8DBE000FC3A3 /* Hydrazine.h */; };
-		D4E766E8256B8EDE000FC3A3 /* HydrazineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E76668256B8DBE000FC3A3 /* HydrazineTests.swift */; };
 		D4E766FC256B8F36000FC3A3 /* GeminiTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E766FB256B8F36000FC3A3 /* GeminiTransaction.swift */; };
 		D4E766FD256B8F36000FC3A3 /* GeminiTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E766FB256B8F36000FC3A3 /* GeminiTransaction.swift */; };
 		D4E7670B256B9132000FC3A3 /* GeminiURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E7670A256B9132000FC3A3 /* GeminiURL.swift */; };
@@ -170,7 +168,6 @@
 		D4E7665B256B8DBE000FC3A3 /* Hydrazine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Hydrazine.h; sourceTree = "<group>"; };
 		D4E7665C256B8DBE000FC3A3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D4E76661256B8DBE000FC3A3 /* HydrazineTests (macOS).xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "HydrazineTests (macOS).xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		D4E76668256B8DBE000FC3A3 /* HydrazineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HydrazineTests.swift; sourceTree = "<group>"; };
 		D4E7666A256B8DBE000FC3A3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D4E766A5256B8E32000FC3A3 /* Hydrazine.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Hydrazine.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4E766AD256B8E32000FC3A3 /* HydrazineTests (iOS).xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "HydrazineTests (iOS).xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -352,7 +349,6 @@
 		D4E76667256B8DBE000FC3A3 /* HydrazineTests */ = {
 			isa = PBXGroup;
 			children = (
-				D4E76668256B8DBE000FC3A3 /* HydrazineTests.swift */,
 				D4E7666A256B8DBE000FC3A3 /* Info.plist */,
 				D4E76725256C3BE7000FC3A3 /* GeminiURLTests.swift */,
 			);
@@ -743,7 +739,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				D4E76726256C3BE7000FC3A3 /* GeminiURLTests.swift in Sources */,
-				D4E76669256B8DBE000FC3A3 /* HydrazineTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -761,7 +756,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				D4E76727256C3BE7000FC3A3 /* GeminiURLTests.swift in Sources */,
-				D4E766E8256B8EDE000FC3A3 /* HydrazineTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
