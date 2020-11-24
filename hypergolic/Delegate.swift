@@ -8,6 +8,35 @@ class Delegate: GeminiTransactionDelegate {
         NSLog("Has started")
     }
     
+    func willVerifyTrust(_ transaction: GeminiTransaction,
+                         secProtocolMetadata: sec_protocol_metadata_t,
+                         secTrust: sec_trust_t)
+    {
+        NSLog("Will verify trust")
+    }
+    
+    func didVerifyTrust(_ transaction: GeminiTransaction,
+                        trust: SecTrust,
+                        error: CFError?)
+    {
+        if let error = error {
+            NSLog("Did verify trust with error: \(error)")
+        } else {
+            NSLog("Did verify trust")
+        }
+    }
+    
+    func didFailTrustVerification(_ transaction: GeminiTransaction,
+                                  trust: SecTrust,
+                                  error: CFError?)
+    {
+        if let error = error {
+            NSLog("Did fail trust verification with error: \(error)")
+        } else {
+            NSLog("Did fail trust verification")
+        }
+    }
+    
     func willSendRequest(_ transaction: GeminiTransaction, request: Data) {
         NSLog("Will send request")
         // TODO: temporary logging for request data below
@@ -20,7 +49,7 @@ class Delegate: GeminiTransactionDelegate {
     }
     
     func didReceiveData(_ transaction: GeminiTransaction, data: Data) {
-        NSLog("Did receive data (\(data.count) bytes)")
+        NSLog("Did receive data: \(data.count) bytes")
         // TODO: temporary logging for response data below
         let responseString = String(data: data, encoding: .utf8)!
         print("<<< \(responseString)")

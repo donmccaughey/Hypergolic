@@ -4,7 +4,19 @@ import Network
 
 public protocol GeminiTransactionDelegate {
     func hasStarted(_ transaction: GeminiTransaction)
+    
+    func willVerifyTrust(_ transaction: GeminiTransaction,
+                         secProtocolMetadata: sec_protocol_metadata_t,
+                         secTrust: sec_trust_t)
+    func didVerifyTrust(_ transaction: GeminiTransaction,
+                        trust: SecTrust,
+                        error: CFError?)
+    func didFailTrustVerification(_ transaction: GeminiTransaction,
+                                  trust: SecTrust,
+                                  error: CFError?)
+
     func willSendRequest(_ transaction: GeminiTransaction, request: Data)
+    
     func willScheduleReceive(_ transaction: GeminiTransaction)
     func didReceiveData(_ transaction: GeminiTransaction, data: Data)
     func didReceiveFinalMessage(_ transaction: GeminiTransaction)
