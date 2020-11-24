@@ -6,7 +6,7 @@ struct ContentView: View {
     let transaction = GeminiTransaction(url: URL(string: "gemini://gemini.circumlunar.space/")!)
     
     var body: some View {
-        Text("Hello, world!")
+        Text("\(transaction.url)")
             .padding()
     }
 }

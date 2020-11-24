@@ -47,7 +47,7 @@ sec_protocol_options_set_verify_block(tlsOptions.securityProtocolOptions, { (sec
         isVerified = false
     }
     sec_protocol_verify_complete(isVerified)
-}, DispatchQueue.main)
+}, transaction.queue)
 
 let tlsParameters = NWParameters.init(tls: tlsOptions)
 
@@ -79,7 +79,7 @@ connection.stateUpdateHandler = { (newState) in
 }
 
 NSLog("Starting")
-connection.start(queue: DispatchQueue.main)
+connection.start(queue: transaction.queue)
 
 NSLog("Sending")
 let requestString = "\(transaction.url)\r\n"
