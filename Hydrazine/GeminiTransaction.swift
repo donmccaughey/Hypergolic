@@ -6,6 +6,8 @@ public class GeminiTransaction {
     public let queue: DispatchQueue
     public let url: URL
     
+    public lazy var host = NWEndpoint.Host(url.host!)
+    public lazy var port = NWEndpoint.Port(integerLiteral: UInt16(url.port ?? 1965))
     public lazy var tlsParameters = NWParameters.init(tls: getCustomTLSOptions())
     
     public init(url: URL) {

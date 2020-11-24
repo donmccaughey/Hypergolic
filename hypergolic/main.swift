@@ -18,10 +18,9 @@ case .error(let error):
 
 let transaction = GeminiTransaction(url: url)
 
-let host = NWEndpoint.Host(transaction.url.host!)
-let port = NWEndpoint.Port(integerLiteral: UInt16(transaction.url.port ?? 1965))
-
-let connection = NWConnection(host:host, port:port, using:transaction.tlsParameters)
+let connection = NWConnection(host: transaction.host,
+                              port: transaction.port,
+                              using: transaction.tlsParameters)
 connection.stateUpdateHandler = { (newState) in
     switch (newState) {
     case .setup:
