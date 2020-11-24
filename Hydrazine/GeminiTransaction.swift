@@ -61,34 +61,10 @@ public class GeminiTransaction {
         // TODO: configure securityProtocolOptions
         sec_protocol_options_set_verify_block(securityProtocolOptions, {
             [self] (sec_protocol_metadata, sec_trust, sec_protocol_verify_complete) in
+            
             let trust = sec_trust_copy_ref(sec_trust).takeRetainedValue()
-
-            delegate?.willVerifyTrust(self,
-                                      protocolMetadata: sec_protocol_metadata,
-                                      trust: trust)
-            
-            SecTrustSetOptions(trust, [.allowExpired, .allowExpiredRoot, .leafIsCA, .implicitAnchors])
-            var error: CFError?
-            let verified = SecTrustEvaluateWithError(trust, &error)
-            
-            let isVerified: Bool
-            if verified {
-                delegate?.didVerifyTrust(self, trust: trust, error: nil)
-                isVerified = true
-            } else if let error = error {
-                // TODO: improve error handling
-                let expectedErrors = [-25318, -67609, -67901]
-                if expectedErrors.contains(CFErrorGetCode(error)) {
-                    delegate?.didVerifyTrust(self, trust: trust, error: error)
-                    isVerified = true
-                } else {
-                    delegate?.didFailTrustVerification(self, trust: trust, error: error)
-                    isVerified = false
-                }
-            } else {
-                delegate?.didFailTrustVerification(self, trust: trust, error: nil)
-                isVerified = false
-            }
+            let isVerified = self.verifyTrust(protocolMetadata: sec_protocol_metadata,
+                                              trust: trust)
             sec_protocol_verify_complete(isVerified)
         }, queue)
         return tlsOptions
@@ -113,5 +89,37 @@ public class GeminiTransaction {
             }
             self.receive()
         }
+    }
+    
+    private func verifyTrust(protocolMetadata: sec_protocol_metadata_t,
+                             trust: SecTrust) -> Bool
+    {
+        delegate?.willVerifyTrust(self,
+                                  protocolMetadata: protocolMetadata,
+                                  trust: trust)
+        
+        SecTrustSetOptions(trust, [.allowExpired, .allowExpiredRoot, .leafIsCA, .implicitAnchors])
+        var error: CFError?
+        let verified = SecTrustEvaluateWithError(trust, &error)
+        
+        let isVerified: Bool
+        if verified {
+            delegate?.didVerifyTrust(self, trust: trust, error: nil)
+            isVerified = true
+        } else if let error = error {
+            // TODO: improve error handling
+            let expectedErrors = [-25318, -67609, -67901]
+            if expectedErrors.contains(CFErrorGetCode(error)) {
+                delegate?.didVerifyTrust(self, trust: trust, error: error)
+                isVerified = true
+            } else {
+                delegate?.didFailTrustVerification(self, trust: trust, error: error)
+                isVerified = false
+            }
+        } else {
+            delegate?.didFailTrustVerification(self, trust: trust, error: nil)
+            isVerified = false
+        }
+        return isVerified
     }
 }
