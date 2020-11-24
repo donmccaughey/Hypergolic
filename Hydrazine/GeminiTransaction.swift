@@ -31,6 +31,17 @@ public class GeminiTransaction {
         self.url = url
     }
     
+    public func start() {
+        NSLog("Starting")
+        connection.start(queue: queue)
+
+        NSLog("Sending")
+        let requestString = "\(url)\r\n"
+        NSLog(">>> \(requestString)")
+        let request = requestString.data(using: .utf8)
+        connection.send(content: request, completion: .idempotent)
+    }
+    
     private func createConnection() -> NWConnection {
         let connection = NWConnection(host: host, port: port, using: tlsParameters)
         connection.stateUpdateHandler = { (newState) in

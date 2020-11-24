@@ -16,15 +16,7 @@ case .error(let error):
 }
 
 let transaction = GeminiTransaction(url: url, delegate: Delegate())
-
-NSLog("Starting")
-transaction.connection.start(queue: transaction.queue)
-
-NSLog("Sending")
-let requestString = "\(transaction.url)\r\n"
-NSLog(">>> \(requestString)")
-let request = requestString.data(using: .utf8)
-transaction.connection.send(content: request, completion: .idempotent)
+transaction.start()
 
 func receive() {
     NSLog("Receiving")
