@@ -16,7 +16,7 @@ case .error(let error):
 }
 
 
-let transaction = GeminiTransaction()
+let transaction = GeminiTransaction(url: url)
 
 
 let tlsOptions = NWProtocolTLS.Options()
@@ -52,8 +52,8 @@ sec_protocol_options_set_verify_block(tlsOptions.securityProtocolOptions, { (sec
 let tlsParameters = NWParameters.init(tls: tlsOptions)
 
 
-let host = NWEndpoint.Host(url.host!)
-let port = NWEndpoint.Port(integerLiteral: UInt16(url.port ?? 1965))
+let host = NWEndpoint.Host(transaction.url.host!)
+let port = NWEndpoint.Port(integerLiteral: UInt16(transaction.url.port ?? 1965))
 
 let connection = NWConnection(host:host, port:port, using: tlsParameters)
 connection.stateUpdateHandler = { (newState) in
@@ -82,7 +82,7 @@ NSLog("Starting")
 connection.start(queue: DispatchQueue.main)
 
 NSLog("Sending")
-let requestString = "\(url)\r\n"
+let requestString = "\(transaction.url)\r\n"
 NSLog(">>> \(requestString)")
 let request = requestString.data(using: .utf8)
 connection.send(content: request, completion: .idempotent)
