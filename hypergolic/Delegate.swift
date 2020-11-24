@@ -9,8 +9,8 @@ class Delegate: GeminiTransactionDelegate {
     }
     
     func willVerifyTrust(_ transaction: GeminiTransaction,
-                         secProtocolMetadata: sec_protocol_metadata_t,
-                         secTrust: sec_trust_t)
+                         protocolMetadata: sec_protocol_metadata_t,
+                         trust: SecTrust)
     {
         NSLog("Will verify trust")
     }

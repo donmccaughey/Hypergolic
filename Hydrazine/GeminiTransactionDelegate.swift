@@ -6,8 +6,8 @@ public protocol GeminiTransactionDelegate {
     func hasStarted(_ transaction: GeminiTransaction)
     
     func willVerifyTrust(_ transaction: GeminiTransaction,
-                         secProtocolMetadata: sec_protocol_metadata_t,
-                         secTrust: sec_trust_t)
+                         protocolMetadata: sec_protocol_metadata_t,
+                         trust: SecTrust)
     func didVerifyTrust(_ transaction: GeminiTransaction,
                         trust: SecTrust,
                         error: CFError?)

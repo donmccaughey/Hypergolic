@@ -7,14 +7,14 @@ public class GeminiTransaction {
     public let queue: DispatchQueue
     public let url: URL
     
-    public lazy var connection = createConnection()
-    public lazy var host = NWEndpoint.Host(url.host!)
-    public lazy var port = NWEndpoint.Port(integerLiteral: UInt16(url.port ?? 1965))
-    public lazy var tlsParameters = NWParameters.init(tls: createTLSOptions())
+    private lazy var connection = createConnection()
+    private lazy var host = NWEndpoint.Host(url.host!)
+    private lazy var port = NWEndpoint.Port(integerLiteral: UInt16(url.port ?? 1965))
+    private lazy var tlsParameters = NWParameters.init(tls: createTLSOptions())
     
     public init(url: URL,
                 delegate: GeminiTransactionDelegate? = nil,
-                queue: DispatchQueue = DispatchQueue(label: "cc.donm.Hydrazine"))
+                queue: DispatchQueue = DispatchQueue(label: "cc.donm.Hydrazine.GeminiTransaction"))
     {
         self.delegate = delegate
         self.queue = queue
@@ -61,32 +61,32 @@ public class GeminiTransaction {
         // TODO: configure securityProtocolOptions
         sec_protocol_options_set_verify_block(securityProtocolOptions, {
             [self] (sec_protocol_metadata, sec_trust, sec_protocol_verify_complete) in
-            
+            let trust = sec_trust_copy_ref(sec_trust).takeRetainedValue()
+
             delegate?.willVerifyTrust(self,
-                                      secProtocolMetadata: sec_protocol_metadata,
-                                      secTrust: sec_trust)
+                                      protocolMetadata: sec_protocol_metadata,
+                                      trust: trust)
             
-            let secTrust = sec_trust_copy_ref(sec_trust).takeRetainedValue()
-            SecTrustSetOptions(secTrust, [.allowExpired, .allowExpiredRoot, .leafIsCA, .implicitAnchors])
+            SecTrustSetOptions(trust, [.allowExpired, .allowExpiredRoot, .leafIsCA, .implicitAnchors])
             var error: CFError?
-            let verified = SecTrustEvaluateWithError(secTrust, &error)
+            let verified = SecTrustEvaluateWithError(trust, &error)
             
             let isVerified: Bool
             if verified {
-                delegate?.didVerifyTrust(self, trust: secTrust, error: nil)
+                delegate?.didVerifyTrust(self, trust: trust, error: nil)
                 isVerified = true
             } else if let error = error {
                 // TODO: improve error handling
                 let expectedErrors = [-25318, -67609, -67901]
                 if expectedErrors.contains(CFErrorGetCode(error)) {
-                    delegate?.didVerifyTrust(self, trust: secTrust, error: error)
+                    delegate?.didVerifyTrust(self, trust: trust, error: error)
                     isVerified = true
                 } else {
-                    delegate?.didFailTrustVerification(self, trust: secTrust, error: error)
+                    delegate?.didFailTrustVerification(self, trust: trust, error: error)
                     isVerified = false
                 }
             } else {
-                delegate?.didFailTrustVerification(self, trust: secTrust, error: nil)
+                delegate?.didFailTrustVerification(self, trust: trust, error: nil)
                 isVerified = false
             }
             sec_protocol_verify_complete(isVerified)
