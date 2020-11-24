@@ -60,7 +60,7 @@ public class GeminiTransaction {
         let securityProtocolOptions = tlsOptions.securityProtocolOptions
         // TODO: configure securityProtocolOptions
         sec_protocol_options_set_verify_block(securityProtocolOptions, {
-            [self] (sec_protocol_metadata, sec_trust, sec_protocol_verify_complete) in
+            (sec_protocol_metadata, sec_trust, sec_protocol_verify_complete) in
             
             let trust = sec_trust_copy_ref(sec_trust).takeRetainedValue()
             let isVerified = self.verifyTrust(protocolMetadata: sec_protocol_metadata,
@@ -69,25 +69,36 @@ public class GeminiTransaction {
         }, queue)
         return tlsOptions
     }
-
+    
+    private func onReceive(data: Data?,
+                           contentContext: NWConnection.ContentContext?,
+                           isComplete: Bool,
+                           error: NWError?)
+    {
+        if let data = data, !data.isEmpty {
+            delegate?.didReceiveData(self, data: data)
+            self.receive()
+        }
+        if let contentContext = contentContext, contentContext.isFinal {
+            delegate?.didReceiveFinalMessage(self)
+        }
+        if isComplete {
+            delegate?.receiveDidComplete(self)
+        }
+        if let error = error {
+            delegate?.receiveDidFail(self, error: error)
+        }
+    }
+    
     private func receive() {
         delegate?.willScheduleReceive(self)
-        connection.receive(minimumIncompleteLength: 1, maximumLength: 4096) {
-            [self] (data, contentContext, isComplete, error) in
+        connection.receive(minimumIncompleteLength: 1024, maximumLength: 65536) {
+            (data, contentContext, isComplete, error) in
             
-            if let data = data, !data.isEmpty {
-                delegate?.didReceiveData(self, data: data)
-            }
-            if let contentContext = contentContext, contentContext.isFinal {
-                delegate?.didReceiveFinalMessage(self)
-            }
-            if isComplete {
-                delegate?.receiveDidComplete(self)
-            }
-            if let error = error {
-                delegate?.receiveDidFail(self, error: error)
-            }
-            self.receive()
+            self.onReceive(data: data,
+                           contentContext: contentContext,
+                           isComplete: isComplete,
+                           error: error)
         }
     }
     
