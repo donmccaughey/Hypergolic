@@ -18,8 +18,7 @@ public protocol GeminiTransactionDelegate {
     func willSendRequest(_ transaction: GeminiTransaction, request: Data)
     
     func willScheduleReceive(_ transaction: GeminiTransaction)
-    func didReceiveData(_ transaction: GeminiTransaction, data: Data)
-    func didReceiveFinalMessage(_ transaction: GeminiTransaction)
+    func didReceiveData(_ transaction: GeminiTransaction, data: Data, isMessageComplete: Bool)
     func receiveDidComplete(_ transaction: GeminiTransaction)
     func receiveDidFail(_ transaction: GeminiTransaction, error: NWError)
     

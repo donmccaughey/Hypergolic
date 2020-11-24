@@ -72,32 +72,31 @@ public class GeminiTransaction {
     
     private func onReceive(data: Data?,
                            contentContext: NWConnection.ContentContext?,
-                           isComplete: Bool,
+                           isMessageComplete: Bool,
                            error: NWError?)
     {
-        if let data = data, !data.isEmpty {
-            delegate?.didReceiveData(self, data: data)
-            self.receive()
-        }
-        if let contentContext = contentContext, contentContext.isFinal {
-            delegate?.didReceiveFinalMessage(self)
-        }
-        if isComplete {
-            delegate?.receiveDidComplete(self)
-        }
         if let error = error {
             delegate?.receiveDidFail(self, error: error)
+            return
+        }
+        if let data = data {
+            delegate?.didReceiveData(self, data: data, isMessageComplete: isMessageComplete)
+            if !isMessageComplete {
+                receive()
+            }
+        } else {
+            delegate?.receiveDidComplete(self)
         }
     }
     
     private func receive() {
         delegate?.willScheduleReceive(self)
-        connection.receive(minimumIncompleteLength: 1024, maximumLength: 65536) {
-            (data, contentContext, isComplete, error) in
+        connection.receive(minimumIncompleteLength: 1024, maximumLength: 64 * 1024) {
+            (data, contentContext, isMessageComplete, error) in
             
             self.onReceive(data: data,
                            contentContext: contentContext,
-                           isComplete: isComplete,
+                           isMessageComplete: isMessageComplete,
                            error: error)
         }
     }

@@ -48,21 +48,19 @@ class Delegate: GeminiTransactionDelegate {
         NSLog("Will schedule receive")
     }
     
-    func didReceiveData(_ transaction: GeminiTransaction, data: Data) {
-        NSLog("Did receive data: \(data.count) bytes")
+    func didReceiveData(_ transaction: GeminiTransaction, data: Data, isMessageComplete: Bool) {
+        NSLog("Did receive data: \(data.count) bytes, message is\(isMessageComplete ? " " : " not ")complete")
         // TODO: temporary logging for response data below
         let responseString = String(data: data, encoding: .utf8)!
         print("<<< \(responseString)")
-    }
-    
-    func didReceiveFinalMessage(_ transaction: GeminiTransaction) {
-        NSLog("Did receive final message")
-        exit(EXIT_SUCCESS);
+        if isMessageComplete {
+            exit(EXIT_SUCCESS)
+        }
     }
     
     func receiveDidComplete(_ transaction: GeminiTransaction) {
         NSLog("Receive did complete")
-        exit(EXIT_SUCCESS);
+        exit(EXIT_SUCCESS)
     }
     
     func receiveDidFail(_ transaction: GeminiTransaction, error: NWError) {
