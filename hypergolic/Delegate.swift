@@ -37,18 +37,21 @@ class Delegate: GeminiTransactionDelegate {
         }
     }
     
-    func willSendRequest(_ transaction: GeminiTransaction, request: Data) {
+    func willSendRequest(_ transaction: GeminiTransaction,
+                         request: GeminiRequest)
+    {
         NSLog("Will send request")
-        // TODO: temporary logging for request data below
-        let requestString = String(data: request, encoding: .utf8)!
-        NSLog(">>> \(requestString)")
+        NSLog(">>> \(request.string)")
     }
     
     func willScheduleReceive(_ transaction: GeminiTransaction) {
         NSLog("Will schedule receive")
     }
     
-    func didReceiveData(_ transaction: GeminiTransaction, data: Data, isMessageComplete: Bool) {
+    func didReceiveData(_ transaction: GeminiTransaction,
+                        data: Data,
+                        isMessageComplete: Bool)
+    {
         NSLog("Did receive data: \(data.count) bytes, message is\(isMessageComplete ? " " : " not ")complete")
         // TODO: temporary logging for response data below
         let responseString = String(data: data, encoding: .utf8)!

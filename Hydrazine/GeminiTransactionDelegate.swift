@@ -15,10 +15,13 @@ public protocol GeminiTransactionDelegate {
                                   trust: SecTrust,
                                   error: CFError?)
 
-    func willSendRequest(_ transaction: GeminiTransaction, request: Data)
+    func willSendRequest(_ transaction: GeminiTransaction,
+                         request: GeminiRequest)
     
     func willScheduleReceive(_ transaction: GeminiTransaction)
-    func didReceiveData(_ transaction: GeminiTransaction, data: Data, isMessageComplete: Bool)
+    func didReceiveData(_ transaction: GeminiTransaction,
+                        data: Data,
+                        isMessageComplete: Bool)
     func receiveDidComplete(_ transaction: GeminiTransaction)
     func receiveDidFail(_ transaction: GeminiTransaction, error: NWError)
     

@@ -4,31 +4,35 @@ import Network
 
 public class GeminiTransaction {
     public var delegate: GeminiTransactionDelegate?
+    public let request: GeminiRequest
     public let queue: DispatchQueue
-    public let url: URL
     
     private lazy var connection = createConnection()
     private lazy var host = NWEndpoint.Host(url.host!)
     private lazy var port = NWEndpoint.Port(integerLiteral: UInt16(url.port ?? 1965))
     private lazy var tlsParameters = NWParameters.init(tls: createTLSOptions())
     
-    public init(url: URL,
+    public var geminiURL: GeminiURL {
+        request.geminiURL
+    }
+    public var url: URL {
+        request.url
+    }
+    
+    public init(geminiURL: GeminiURL,
                 delegate: GeminiTransactionDelegate? = nil,
                 queue: DispatchQueue = DispatchQueue(label: "cc.donm.Hydrazine.GeminiTransaction"))
     {
         self.delegate = delegate
+        self.request = GeminiRequest(geminiURL: geminiURL)
         self.queue = queue
-        self.url = url
     }
     
     public func run() {
         delegate?.hasStarted(self)
         connection.start(queue: queue)
-
-        let requestString = "\(url)\r\n"
-        let request = requestString.data(using: .utf8)!
         delegate?.willSendRequest(self, request: request)
-        connection.send(content: request, completion: .idempotent)
+        connection.send(content: request.data, completion: .idempotent)
         receive()
     }
     

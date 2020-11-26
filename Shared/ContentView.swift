@@ -3,10 +3,10 @@ import Hydrazine
 
 
 struct ContentView: View {
-    let transaction = GeminiTransaction(url: URL(string: "gemini://gemini.circumlunar.space/")!)
+    // let transaction = GeminiTransaction(geminiURL: GeminiURL.parse(string: "gemini://gemini.circumlunar.space/").get())
     
     var body: some View {
-        Text("\(transaction.url)")
+        Text("Hypergolic")
             .padding()
     }
 }
