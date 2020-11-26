@@ -14,6 +14,8 @@
 		D46759E9256CDBD400CC38D9 /* GeminiRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D46759E7256CDBD400CC38D9 /* GeminiRequest.swift */; };
 		D46759F7256CDBE800CC38D9 /* GeminiResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = D46759F6256CDBE800CC38D9 /* GeminiResponse.swift */; };
 		D46759F8256CDBE800CC38D9 /* GeminiResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = D46759F6256CDBE800CC38D9 /* GeminiResponse.swift */; };
+		D4675A06256F6F0000CC38D9 /* GeminiResponseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4675A05256F6F0000CC38D9 /* GeminiResponseTests.swift */; };
+		D4675A07256F6F0000CC38D9 /* GeminiResponseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4675A05256F6F0000CC38D9 /* GeminiResponseTests.swift */; };
 		D4E7651B256B7951000FC3A3 /* Tests_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E7651A256B7951000FC3A3 /* Tests_iOS.swift */; };
 		D4E76526256B7951000FC3A3 /* Tests_macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E76525256B7951000FC3A3 /* Tests_macOS.swift */; };
 		D4E76528256B7951000FC3A3 /* HypergolicApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E764FF256B794B000FC3A3 /* HypergolicApp.swift */; };
@@ -157,6 +159,7 @@
 		D46759C5256C9C3A00CC38D9 /* GeminiTransactionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeminiTransactionDelegate.swift; sourceTree = "<group>"; };
 		D46759E7256CDBD400CC38D9 /* GeminiRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeminiRequest.swift; sourceTree = "<group>"; };
 		D46759F6256CDBE800CC38D9 /* GeminiResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeminiResponse.swift; sourceTree = "<group>"; };
+		D4675A05256F6F0000CC38D9 /* GeminiResponseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeminiResponseTests.swift; sourceTree = "<group>"; };
 		D4E764FF256B794B000FC3A3 /* HypergolicApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HypergolicApp.swift; sourceTree = "<group>"; };
 		D4E76500256B794B000FC3A3 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		D4E76501256B7951000FC3A3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -365,6 +368,7 @@
 			isa = PBXGroup;
 			children = (
 				D4E7666A256B8DBE000FC3A3 /* Info.plist */,
+				D4675A05256F6F0000CC38D9 /* GeminiResponseTests.swift */,
 				D4E76725256C3BE7000FC3A3 /* GeminiURLTests.swift */,
 			);
 			path = HydrazineTests;
@@ -758,6 +762,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D4E76726256C3BE7000FC3A3 /* GeminiURLTests.swift in Sources */,
+				D4675A06256F6F0000CC38D9 /* GeminiResponseTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -778,6 +783,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D4E76727256C3BE7000FC3A3 /* GeminiURLTests.swift in Sources */,
+				D4675A07256F6F0000CC38D9 /* GeminiResponseTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

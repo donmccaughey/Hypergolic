@@ -9,7 +9,7 @@ public struct GeminiURL {
         
         public var errorMessage: String {
             switch self {
-            case .urlTooLong(let urlString, let byteCount):
+            case let .urlTooLong(urlString, byteCount):
                 return "URL '\(urlString)' is too long by \(byteCount-1024) bytes"
             case .invalidURL(let urlString):
                 return "URL '\(urlString)' is invalid"

@@ -33,7 +33,7 @@ public class GeminiTransaction {
         connection.start(queue: queue)
         delegate?.willSendRequest(self, request: request)
         connection.send(content: request.data, completion: .idempotent)
-        receive()
+        receive(buffer: Data())
     }
     
     private func createConnection() -> NWConnection {
@@ -74,7 +74,8 @@ public class GeminiTransaction {
         return tlsOptions
     }
     
-    private func onReceive(data: Data?,
+    private func onReceive(buffer: Data,
+                           data: Data?,
                            contentContext: NWConnection.ContentContext?,
                            isMessageComplete: Bool,
                            error: NWError?)
@@ -85,20 +86,23 @@ public class GeminiTransaction {
         }
         if let data = data {
             delegate?.didReceiveData(self, data: data, isMessageComplete: isMessageComplete)
-            if !isMessageComplete {
-                receive()
+            if isMessageComplete {
+                
+            } else {
+                receive(buffer: buffer + data)
             }
         } else {
             delegate?.receiveDidComplete(self)
         }
     }
     
-    private func receive() {
+    private func receive(buffer: Data) {
         delegate?.willScheduleReceive(self)
         connection.receive(minimumIncompleteLength: 1024, maximumLength: 64 * 1024) {
             (data, contentContext, isMessageComplete, error) in
             
-            self.onReceive(data: data,
+            self.onReceive(buffer: buffer,
+                           data: data,
                            contentContext: contentContext,
                            isMessageComplete: isMessageComplete,
                            error: error)
