@@ -16,7 +16,7 @@ public struct GeminiResponse {
         case responseHeaderTooLong(Data)
         case invalidUTF8InResponseHeader(Data)
         
-        public var errorMessage: String {
+        public var message: String {
             return "Error parsing response header"
         }
     }

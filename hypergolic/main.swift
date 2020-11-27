@@ -11,6 +11,6 @@ case .success(let geminiURL):
     GeminiTransaction(geminiURL: geminiURL, delegate: Delegate()).run()
     RunLoop.current.run()
 case .failure(let error):
-    print(error.errorMessage)
+    print(error.message)
     exit(EXIT_FAILURE)
 }

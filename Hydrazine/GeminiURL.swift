@@ -7,7 +7,7 @@ public struct GeminiURL {
         case invalidURL(String)
         case missingHost(String)
         
-        public var errorMessage: String {
+        public var message: String {
             switch self {
             case let .urlTooLong(urlString, byteCount):
                 return "URL '\(urlString)' is too long by \(byteCount-1024) bytes"

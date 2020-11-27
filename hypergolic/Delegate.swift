@@ -75,7 +75,7 @@ class Delegate: GeminiTransactionDelegate {
     func didReceiveInvalidResponse(_ transaction: GeminiTransaction,
                                    error: GeminiResponse.ParseError)
     {
-        NSLog("Did receive invalid response: \(error.errorMessage)")
+        NSLog("Did receive invalid response: \(error.message)")
         exit(EXIT_FAILURE)
     }
 
