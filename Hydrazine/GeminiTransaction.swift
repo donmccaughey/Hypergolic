@@ -3,8 +3,14 @@ import Network
 
 
 public class GeminiTransaction {
+    public let receiveMinBytes = 1024
+    public let receiveMaxBytes = 64 * 1024
+//    public let receiveMinBytes = 10
+//    public let receiveMaxBytes = 100
+
     public var delegate: GeminiTransactionDelegate?
     public let request: GeminiRequest
+    public var result: Result<GeminiResponse, GeminiResponse.ParseError>?
     public let queue: DispatchQueue
     
     private lazy var connection = createConnection()
@@ -74,6 +80,17 @@ public class GeminiTransaction {
         return tlsOptions
     }
     
+    private func onMessageComplete(data: Data) {
+        delegate?.receiveDidComplete(self)
+        result = GeminiResponse.parse(data: data)
+        switch result! {
+        case .success(let response):
+            delegate?.didReceiveResponse(self, response: response)
+        case .failure(let error):
+            delegate?.didReceiveInvalidResponse(self, error: error)
+        }
+    }
+    
     private func onReceive(buffer: Data,
                            data: Data?,
                            contentContext: NWConnection.ContentContext?,
@@ -87,18 +104,20 @@ public class GeminiTransaction {
         if let data = data {
             delegate?.didReceiveData(self, data: data, isMessageComplete: isMessageComplete)
             if isMessageComplete {
-                
+                onMessageComplete(data: buffer + data)
             } else {
                 receive(buffer: buffer + data)
             }
         } else {
-            delegate?.receiveDidComplete(self)
+            onMessageComplete(data: buffer)
         }
     }
     
     private func receive(buffer: Data) {
         delegate?.willScheduleReceive(self)
-        connection.receive(minimumIncompleteLength: 1024, maximumLength: 64 * 1024) {
+        connection.receive(minimumIncompleteLength: receiveMinBytes,
+                           maximumLength:receiveMaxBytes)
+        {
             (data, contentContext, isMessageComplete, error) in
             
             self.onReceive(buffer: buffer,

@@ -53,24 +53,32 @@ class Delegate: GeminiTransactionDelegate {
                         isMessageComplete: Bool)
     {
         NSLog("Did receive data: \(data.count) bytes, message is\(isMessageComplete ? " " : " not ")complete")
-        // TODO: temporary logging for response data below
-        let responseString = String(data: data, encoding: .utf8)!
-        print("<<< \(responseString)")
-        if isMessageComplete {
-            exit(EXIT_SUCCESS)
-        }
     }
     
     func receiveDidComplete(_ transaction: GeminiTransaction) {
         NSLog("Receive did complete")
-        exit(EXIT_SUCCESS)
     }
     
     func receiveDidFail(_ transaction: GeminiTransaction, error: NWError) {
-        NSLog("Receive error: \(error)")
+        NSLog("Receive did fail: \(error)")
         exit(EXIT_FAILURE)
     }
     
+    func didReceiveResponse(_ transaction: GeminiTransaction,
+                            response: GeminiResponse)
+    {
+        NSLog("Did receive response: statusCode: \(response.statusCode), meta: \(response.meta)")
+        NSLog("<<< \(response.string)")
+        exit(EXIT_SUCCESS)
+    }
+    
+    func didReceiveInvalidResponse(_ transaction: GeminiTransaction,
+                                   error: GeminiResponse.ParseError)
+    {
+        NSLog("Did receive invalid response: \(error.errorMessage)")
+        exit(EXIT_FAILURE)
+    }
+
     func connectionIsSetup(_ transaction: GeminiTransaction) {
         NSLog("Connection is setup")
     }

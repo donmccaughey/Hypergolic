@@ -25,6 +25,11 @@ public protocol GeminiTransactionDelegate {
     func receiveDidComplete(_ transaction: GeminiTransaction)
     func receiveDidFail(_ transaction: GeminiTransaction, error: NWError)
     
+    func didReceiveResponse(_ transaction: GeminiTransaction,
+                            response: GeminiResponse)
+    func didReceiveInvalidResponse(_ transaction: GeminiTransaction,
+                                   error: GeminiResponse.ParseError)
+    
     func connectionIsSetup(_ transaction: GeminiTransaction)
     func connectionIsWaiting(_ transaction: GeminiTransaction, error: NWError)
     func connectionIsPreparing(_ transaction: GeminiTransaction)

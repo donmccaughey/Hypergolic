@@ -16,6 +16,10 @@
 		D46759F8256CDBE800CC38D9 /* GeminiResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = D46759F6256CDBE800CC38D9 /* GeminiResponse.swift */; };
 		D4675A06256F6F0000CC38D9 /* GeminiResponseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4675A05256F6F0000CC38D9 /* GeminiResponseTests.swift */; };
 		D4675A07256F6F0000CC38D9 /* GeminiResponseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4675A05256F6F0000CC38D9 /* GeminiResponseTests.swift */; };
+		D4675A23257099B000CC38D9 /* UInt8.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4675A142570993600CC38D9 /* UInt8.swift */; };
+		D4675A2A257099B100CC38D9 /* UInt8.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4675A142570993600CC38D9 /* UInt8.swift */; };
+		D4675A322570BB0600CC38D9 /* UInt8Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4675A312570BB0600CC38D9 /* UInt8Tests.swift */; };
+		D4675A332570BB0600CC38D9 /* UInt8Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4675A312570BB0600CC38D9 /* UInt8Tests.swift */; };
 		D4E7651B256B7951000FC3A3 /* Tests_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E7651A256B7951000FC3A3 /* Tests_iOS.swift */; };
 		D4E76526256B7951000FC3A3 /* Tests_macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E76525256B7951000FC3A3 /* Tests_macOS.swift */; };
 		D4E76528256B7951000FC3A3 /* HypergolicApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E764FF256B794B000FC3A3 /* HypergolicApp.swift */; };
@@ -160,6 +164,8 @@
 		D46759E7256CDBD400CC38D9 /* GeminiRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeminiRequest.swift; sourceTree = "<group>"; };
 		D46759F6256CDBE800CC38D9 /* GeminiResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeminiResponse.swift; sourceTree = "<group>"; };
 		D4675A05256F6F0000CC38D9 /* GeminiResponseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeminiResponseTests.swift; sourceTree = "<group>"; };
+		D4675A142570993600CC38D9 /* UInt8.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UInt8.swift; sourceTree = "<group>"; };
+		D4675A312570BB0600CC38D9 /* UInt8Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UInt8Tests.swift; sourceTree = "<group>"; };
 		D4E764FF256B794B000FC3A3 /* HypergolicApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HypergolicApp.swift; sourceTree = "<group>"; };
 		D4E76500256B794B000FC3A3 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		D4E76501256B7951000FC3A3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -360,6 +366,7 @@
 				D4E766FB256B8F36000FC3A3 /* GeminiTransaction.swift */,
 				D46759C5256C9C3A00CC38D9 /* GeminiTransactionDelegate.swift */,
 				D4E7670A256B9132000FC3A3 /* GeminiURL.swift */,
+				D4675A142570993600CC38D9 /* UInt8.swift */,
 			);
 			path = Hydrazine;
 			sourceTree = "<group>";
@@ -370,6 +377,7 @@
 				D4E7666A256B8DBE000FC3A3 /* Info.plist */,
 				D4675A05256F6F0000CC38D9 /* GeminiResponseTests.swift */,
 				D4E76725256C3BE7000FC3A3 /* GeminiURLTests.swift */,
+				D4675A312570BB0600CC38D9 /* UInt8Tests.swift */,
 			);
 			path = HydrazineTests;
 			sourceTree = "<group>";
@@ -751,6 +759,7 @@
 			files = (
 				D46759E8256CDBD400CC38D9 /* GeminiRequest.swift in Sources */,
 				D46759F7256CDBE800CC38D9 /* GeminiResponse.swift in Sources */,
+				D4675A23257099B000CC38D9 /* UInt8.swift in Sources */,
 				D4E766FC256B8F36000FC3A3 /* GeminiTransaction.swift in Sources */,
 				D46759D9256C9C6600CC38D9 /* GeminiTransactionDelegate.swift in Sources */,
 				D4E7670B256B9132000FC3A3 /* GeminiURL.swift in Sources */,
@@ -762,6 +771,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D4E76726256C3BE7000FC3A3 /* GeminiURLTests.swift in Sources */,
+				D4675A322570BB0600CC38D9 /* UInt8Tests.swift in Sources */,
 				D4675A06256F6F0000CC38D9 /* GeminiResponseTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -772,6 +782,7 @@
 			files = (
 				D46759E9256CDBD400CC38D9 /* GeminiRequest.swift in Sources */,
 				D46759F8256CDBE800CC38D9 /* GeminiResponse.swift in Sources */,
+				D4675A2A257099B100CC38D9 /* UInt8.swift in Sources */,
 				D4E766FD256B8F36000FC3A3 /* GeminiTransaction.swift in Sources */,
 				D46759E0256C9C6600CC38D9 /* GeminiTransactionDelegate.swift in Sources */,
 				D4E7670C256B9132000FC3A3 /* GeminiURL.swift in Sources */,
@@ -783,6 +794,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D4E76727256C3BE7000FC3A3 /* GeminiURLTests.swift in Sources */,
+				D4675A332570BB0600CC38D9 /* UInt8Tests.swift in Sources */,
 				D4675A07256F6F0000CC38D9 /* GeminiResponseTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
